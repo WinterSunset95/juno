@@ -9,6 +9,9 @@
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
+    pythonEnv = pkgs.python3.withPackages (ps: with ps; [
+      grip
+    ]);
   in {
     devShells.${system}.default = pkgs.mkShell {
       nativeBuildInputs = with pkgs; [
@@ -20,6 +23,7 @@
       ];
 
       buildInputs = with pkgs; [
+        pythonEnv
         wayland
         wayland-protocols
         wayland-scanner
@@ -28,6 +32,10 @@
         mesa
         seatd
         udev
+        pixman
+        libdrm
+        libglvnd
+        libgbm
       ];
 
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
