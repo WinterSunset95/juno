@@ -11,7 +11,16 @@
     pkgs = import nixpkgs { inherit system; };
     pythonEnv = pkgs.python3.withPackages (ps: with ps; [
       grip
+      google-generativeai
+      playwright
     ]);
+    aider-full = pkgs.aider-chat.overrideAttrs (old: {
+      propagatedBuildInputs = old.propagatedBuildInputs ++ (with pkgs.python3Packages; [
+        google-generativeai
+        playwright
+      ]);
+    });
+
   in {
     devShells.${system}.default = pkgs.mkShell {
       nativeBuildInputs = with pkgs; [
@@ -36,6 +45,7 @@
         libdrm
         libglvnd
         libgbm
+        aider-full
       ];
 
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
@@ -44,6 +54,10 @@
         libinput
         mesa
         udev
+        pixman
+        libdrm
+        libglvnd
+        libgbm
       ]);
     };
   };

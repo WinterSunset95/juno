@@ -1,0 +1,3 @@
+1. I still have a very hard time wrapping my head around smithay's approach on things. Would it serve me better to actually learn the base wayland specifications instead and implement the absolute minimal base features on my own? This IS an educational project anyways so...
+2. Give me an in-depth rundown of each trait we have to implement and HOW to implement them for the absolute base features (getting a window to appear) of smithay.
+3. I left "// AI! ...." comments in areas of my code that i don't quite understand. Take a look at them and please explain.

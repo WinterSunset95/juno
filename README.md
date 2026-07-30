@@ -6,5 +6,8 @@ This project will probably never see the light of day. It is not a project I eve
 developer looked through the code and improve bad code that I am sure I will have. Thanks :>
 
 # Notes
-Igore this part. Just random tidbits of knowledge I learnt that I wrote down to help bring home the core ideas.
+Igore this part. Just random tidbits of knowledge I learnt that I wrote down to help bring home the core ideas. A lot of the notes are explainations I get through AI tools.
 - [Rust stuff](./notes/rusty.md)
+- [Smithay and Wayland stuff](./notes/wayland.md)
+
+

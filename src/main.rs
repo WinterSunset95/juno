@@ -1,30 +1,41 @@
-use smithay::reexports::calloop::{EventLoop, LoopSignal};
-use smithay::reexports::wayland_server::Display;
+mod state;
+mod winit;
+mod handlers;
+// mod grabs;
+// mod input;
 
-pub struct JunoState {
-    pub is_running: bool,
-}
+use smithay::{
+    reexports::{
+        calloop::{ EventLoop },
+        wayland_server::Display,
+    },
+};
 
-fn main() -> Result<(), Box<dyn std::error::Error>> { // What is this return?
-    tracing_subscriber::fmt().init(); // What does this do?
+
+use state::Juno;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    tracing_subscriber::fmt().init();
     tracing::info!("[-] Starting Juno...");
 
-    let mut event_loop: EventLoop<JunoState> = EventLoop::try_new()?; // What's this question mark?
+    let mut event_loop: EventLoop<Juno> = EventLoop::try_new()?;
+    let display: Display<Juno> = Display::new()?;
 
-    let loop_handle = event_loop.handle();
-    let loop_signal  = event_loop.get_signal();
+    let mut state = Juno::new(&mut event_loop, display);
 
-    let mut display: Display<JunoState> = Display::new()?;
-
-    let mut state = JunoState {
-        is_running: true,
-    };
+    winit::init_winit(&mut event_loop, &mut state)?;
 
     tracing::info!("[+] Juno initialized! Entering main loop!");
 
-    while state.is_running {
-        event_loop.dispatch(None, &mut state)?; // What does the & sign mean?
-    };
+    event_loop.run(None, &mut state, move |_| {
+        // juno is running
+    })?;
+
+    // while state.is_running {
+    //     event_loop.dispatch(None, &mut state)?;
+    // };
+
+    tracing::info!("Juno Shutting Down");
 
     Ok(())
 }
