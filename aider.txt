@@ -1,0 +1,11 @@
+/drop
+/add       src/grabs/mod.rs
+/add       src/grabs/move_grab.rs
+/add       src/grabs/resize_grab.rs
+/add       src/handlers/compositor.rs
+/add       src/handlers/mod.rs
+/add       src/handlers/xdg_shell.rs
+/add       src/input.rs
+/add       src/main.rs
+/add       src/state.rs
+/add       src/winit.rs

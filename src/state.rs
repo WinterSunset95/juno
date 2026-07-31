@@ -57,3 +57,15 @@ impl Juno {
         }
     }
 }
+
+/// Data associated with a wayland client that connects to Juno.
+/// One instance of this type per client.
+#[derive(Default)]
+pub struct JunoClientState {
+    pub compositor_state: CompositorClientState,
+}
+
+impl ClientData for JunoClientState {
+    fn initialized(&self, _client_id: ClientId) {}
+    fn disconnected(&self, _client_id: ClientId, _reason: DisconnectReason) {}
+}
